@@ -12,7 +12,24 @@
 
 class Net {
     constructor() {
-        this.layers = [];
-        
+        this.config = {
+            'layers':[]
+        };
+        this.size = 0;
+        this.graph = new Graph();
+        // this.rgraph = new Graph();
     }
+
+    add(layer) {
+        this.config['layers'].push(layer);
+        let size = layer['size'];
+        let vlayer = [];
+        for(let i = 0; i < size; i++) {
+            vlayer.push(new Vertex(this.size));
+            this.size += 1;
+        }
+        this.graph.addLayer(vlayer);
+    }
+
+
 }

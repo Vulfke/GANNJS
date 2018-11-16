@@ -1,6 +1,7 @@
 class Vertex {
-    constructor() {
-        this.value = 0
+    constructor(id = 0) {
+        this.id = id;
+        this.value = new Neuron()
         this.adj = []
     }
 
@@ -18,6 +19,8 @@ class Vertex {
 class Graph {
     constructor() {
         this.graph = [];
+        this.in = [];
+        this.out = [];
     }
 
     add_edge(a, b) {
@@ -56,6 +59,21 @@ class Graph {
                 this.add_edge(first[i], second[j]);
                 this.add_edge(second[i], first[i]);
             }
+        }
+    }
+
+    addLayer(layer) {
+        if(len(this.in) == 0) {
+            this.in = layer;
+            this.out = layer;
+        }
+        else {
+            for(let i = 0 ;i < this.out.length; i++) {
+                for(let j = 0; j < layer; j++) {
+                    this.out[i].add_dir(layer[j]);
+                }
+            }
+            this.out = layer;
         }
     }
 }
